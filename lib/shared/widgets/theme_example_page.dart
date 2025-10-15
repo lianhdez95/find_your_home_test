@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../core/theme/theme_extensions.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../theme/theme_cubit.dart';
 
 /// Página de ejemplo que muestra el uso del tema personalizado
 class ThemeExamplePage extends StatelessWidget {
@@ -14,8 +16,7 @@ class ThemeExamplePage extends StatelessWidget {
           IconButton(
             icon: Icon(context.isDarkTheme ? Icons.light_mode : Icons.dark_mode),
             onPressed: () {
-              // Aquí puedes implementar el cambio de tema
-              // Por ejemplo, usando un provider o bloc
+              context.read<ThemeCubit>().toggle();
             },
           ),
         ],

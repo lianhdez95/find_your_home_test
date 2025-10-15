@@ -31,7 +31,7 @@ class AppTheme {
 
   // Theme para modo claro
   static ThemeData get lightTheme {
-    return ThemeData(
+    final base = ThemeData(
       brightness: Brightness.light,
       fontFamily: _fontFamily,
       primarySwatch: Colors.blue,
@@ -168,104 +168,14 @@ class AppTheme {
       ),
 
       // Text theme
-      textTheme: const TextTheme(
-        displayLarge: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 32,
-          fontWeight: FontWeight.w700,
-          color: _black,
-        ),
-        displayMedium: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 28,
-          fontWeight: FontWeight.w600,
-          color: _black,
-        ),
-        displaySmall: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 24,
-          fontWeight: FontWeight.w600,
-          color: _black,
-        ),
-        headlineLarge: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 22,
-          fontWeight: FontWeight.w600,
-          color: _black,
-        ),
-        headlineMedium: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-          color: _black,
-        ),
-        headlineSmall: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-          color: _black,
-        ),
-        titleLarge: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-          color: _black,
-        ),
-        titleMedium: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-          color: _black,
-        ),
-        titleSmall: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-          color: _black,
-        ),
-        bodyLarge: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-          color: _black,
-        ),
-        bodyMedium: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-          color: _black,
-        ),
-        bodySmall: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 12,
-          fontWeight: FontWeight.w400,
-          color: _darkGray,
-        ),
-        labelLarge: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-          color: _black,
-        ),
-        labelMedium: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-          color: _darkGray,
-        ),
-        labelSmall: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 10,
-          fontWeight: FontWeight.w500,
-          color: _darkGray,
-        ),
-      ),
+      textTheme: _baseTextThemeLight,
     );
+    return base;
   }
 
   // Theme para modo oscuro
   static ThemeData get darkTheme {
-    return ThemeData(
+    final base = ThemeData(
       brightness: Brightness.dark,
       fontFamily: _fontFamily,
       primarySwatch: Colors.blue,
@@ -402,99 +312,9 @@ class AppTheme {
       ),
 
       // Text theme
-      textTheme: const TextTheme(
-        displayLarge: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 32,
-          fontWeight: FontWeight.w700,
-          color: _white,
-        ),
-        displayMedium: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 28,
-          fontWeight: FontWeight.w600,
-          color: _white,
-        ),
-        displaySmall: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 24,
-          fontWeight: FontWeight.w600,
-          color: _white,
-        ),
-        headlineLarge: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 22,
-          fontWeight: FontWeight.w600,
-          color: _white,
-        ),
-        headlineMedium: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-          color: _white,
-        ),
-        headlineSmall: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-          color: _white,
-        ),
-        titleLarge: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-          color: _white,
-        ),
-        titleMedium: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-          color: _white,
-        ),
-        titleSmall: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-          color: _white,
-        ),
-        bodyLarge: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-          color: _white,
-        ),
-        bodyMedium: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-          color: _white,
-        ),
-        bodySmall: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 12,
-          fontWeight: FontWeight.w400,
-          color: Color(0xFFBDBDBD),
-        ),
-        labelLarge: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-          color: _white,
-        ),
-        labelMedium: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-          color: Color(0xFFBDBDBD),
-        ),
-        labelSmall: TextStyle(
-          fontFamily: _fontFamily,
-          fontSize: 10,
-          fontWeight: FontWeight.w500,
-          color: Color(0xFFBDBDBD),
-        ),
-      ),
+      textTheme: _baseTextThemeDark,
     );
+    return base;
   }
 
   // Colores personalizados adicionales
@@ -513,4 +333,83 @@ class AppTheme {
   static Color getCustomColor(String colorName) {
     return customColors[colorName] ?? _primaryBlue;
   }
+}
+
+// ---------------- Responsive Typography Support ----------------
+
+// Definimos tamaños base (design tokens) sin escalar; se escalarán en runtime.
+const TextTheme _baseTextThemeLight = TextTheme(
+  displayLarge: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 34, fontWeight: FontWeight.w700, color: AppTheme._black),
+  displayMedium: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 30, fontWeight: FontWeight.w600, color: AppTheme._black),
+  displaySmall: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 26, fontWeight: FontWeight.w600, color: AppTheme._black),
+  headlineLarge: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 24, fontWeight: FontWeight.w600, color: AppTheme._black),
+  headlineMedium: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 22, fontWeight: FontWeight.w600, color: AppTheme._black),
+  headlineSmall: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 20, fontWeight: FontWeight.w600, color: AppTheme._black),
+  titleLarge: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 18, fontWeight: FontWeight.w600, color: AppTheme._black),
+  titleMedium: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 16, fontWeight: FontWeight.w500, color: AppTheme._black),
+  titleSmall: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 14, fontWeight: FontWeight.w500, color: AppTheme._black),
+  bodyLarge: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 16, fontWeight: FontWeight.w400, color: AppTheme._black),
+  bodyMedium: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 14, fontWeight: FontWeight.w400, color: AppTheme._black),
+  bodySmall: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 12, fontWeight: FontWeight.w400, color: AppTheme._darkGray),
+  labelLarge: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 14, fontWeight: FontWeight.w500, color: AppTheme._black),
+  labelMedium: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 12, fontWeight: FontWeight.w500, color: AppTheme._darkGray),
+  labelSmall: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 11, fontWeight: FontWeight.w500, color: AppTheme._darkGray),
+);
+
+const TextTheme _baseTextThemeDark = TextTheme(
+  displayLarge: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 34, fontWeight: FontWeight.w700, color: AppTheme._white),
+  displayMedium: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 30, fontWeight: FontWeight.w600, color: AppTheme._white),
+  displaySmall: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 26, fontWeight: FontWeight.w600, color: AppTheme._white),
+  headlineLarge: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 24, fontWeight: FontWeight.w600, color: AppTheme._white),
+  headlineMedium: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 22, fontWeight: FontWeight.w600, color: AppTheme._white),
+  headlineSmall: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 20, fontWeight: FontWeight.w600, color: AppTheme._white),
+  titleLarge: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 18, fontWeight: FontWeight.w600, color: AppTheme._white),
+  titleMedium: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 16, fontWeight: FontWeight.w500, color: AppTheme._white),
+  titleSmall: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 14, fontWeight: FontWeight.w500, color: AppTheme._white),
+  bodyLarge: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 16, fontWeight: FontWeight.w400, color: AppTheme._white),
+  bodyMedium: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 14, fontWeight: FontWeight.w400, color: AppTheme._white),
+  bodySmall: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 12, fontWeight: FontWeight.w400, color: Color(0xFFBDBDBD)),
+  labelLarge: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 14, fontWeight: FontWeight.w500, color: AppTheme._white),
+  labelMedium: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 12, fontWeight: FontWeight.w500, color: Color(0xFFBDBDBD)),
+  labelSmall: TextStyle(fontFamily: AppTheme._fontFamily, fontSize: 11, fontWeight: FontWeight.w500, color: Color(0xFFBDBDBD)),
+);
+
+/// Escala un TextTheme según ancho, alto y factor de accesibilidad del usuario.
+/// Base width de referencia: 390 (iPhone 14). Limita escalado para evitar excesos.
+TextTheme scaleTextTheme(BuildContext context, TextTheme original) {
+  final media = MediaQuery.of(context);
+  final width = media.size.width;
+  final height = media.size.height;
+  final textScale = media.textScaleFactor; // accesibilidad del sistema
+
+  // Factor basado en ancho y altura (peso mayor al ancho).
+  final widthFactor = (width / 390).clamp(0.85, 1.25);
+  final heightFactor = (height / 844).clamp(0.9, 1.15);
+  final deviceFactor = ((widthFactor * 0.65) + (heightFactor * 0.35));
+
+  // Factor final combinando accesibilidad pero suavizado para no duplicar.
+  final finalFactor = (deviceFactor * (0.5 + (textScale * 0.5))).clamp(0.85, 1.35);
+
+  TextStyle? scale(TextStyle? style) {
+    if (style == null) return null;
+    return style.copyWith(fontSize: (style.fontSize ?? 14) * finalFactor);
+  }
+
+  return TextTheme(
+    displayLarge: scale(original.displayLarge),
+    displayMedium: scale(original.displayMedium),
+    displaySmall: scale(original.displaySmall),
+    headlineLarge: scale(original.headlineLarge),
+    headlineMedium: scale(original.headlineMedium),
+    headlineSmall: scale(original.headlineSmall),
+    titleLarge: scale(original.titleLarge),
+    titleMedium: scale(original.titleMedium),
+    titleSmall: scale(original.titleSmall),
+    bodyLarge: scale(original.bodyLarge),
+    bodyMedium: scale(original.bodyMedium),
+    bodySmall: scale(original.bodySmall),
+    labelLarge: scale(original.labelLarge),
+    labelMedium: scale(original.labelMedium),
+    labelSmall: scale(original.labelSmall),
+  );
 }

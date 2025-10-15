@@ -145,7 +145,7 @@ class AppBorderRadius {
 class AppShadows {
   static List<BoxShadow> get light => [
     BoxShadow(
-      color: Colors.black.withOpacity(0.1),
+      color: Colors.black.withAlpha(100),
       blurRadius: 4,
       offset: const Offset(0, 2),
     ),
@@ -153,7 +153,7 @@ class AppShadows {
   
   static List<BoxShadow> get medium => [
     BoxShadow(
-      color: Colors.black.withOpacity(0.15),
+      color: Colors.black.withAlpha(150),
       blurRadius: 8,
       offset: const Offset(0, 4),
     ),
@@ -161,7 +161,7 @@ class AppShadows {
   
   static List<BoxShadow> get heavy => [
     BoxShadow(
-      color: Colors.black.withOpacity(0.2),
+      color: Colors.black.withAlpha(200),
       blurRadius: 16,
       offset: const Offset(0, 8),
     ),
