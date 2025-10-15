@@ -7,5 +7,5 @@ class GetHousesUseCase {
   final HousesRepository repository;
   GetHousesUseCase(this.repository);
 
-  Future<Result<List<HousePreview>, Failure>> call() async => repository.getHouses();
+  Future<Result<List<HousePreview>, Failure>> call({bool forceRefresh = false}) async => repository.getHouses(forceRefresh: forceRefresh);
 }

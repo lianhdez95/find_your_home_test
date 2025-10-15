@@ -13,3 +13,20 @@ class HomeLoadRequested extends HomeEvent {
 class HomeRefreshRequested extends HomeEvent {
   const HomeRefreshRequested();
 }
+
+class HomeFavoritesLoadRequested extends HomeEvent {
+  final String userEmail;
+  const HomeFavoritesLoadRequested(this.userEmail);
+
+  @override
+  List<Object?> get props => [userEmail];
+}
+
+class HomeFavoriteToggled extends HomeEvent {
+  final String userEmail;
+  final String houseId;
+  const HomeFavoriteToggled({required this.userEmail, required this.houseId});
+
+  @override
+  List<Object?> get props => [userEmail, houseId];
+}
