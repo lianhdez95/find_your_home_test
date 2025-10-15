@@ -36,5 +36,8 @@
   "accept": "Accept",
   "cancel": "Cancel",
   "welcomeMessage": "Welcome",
-  "exploreProperties": "Explore properties"
+  "exploreProperties": "Explore properties",
+  "address": "Address",
+  "description": "Description",
+  "favorite": "Favorite"
 }

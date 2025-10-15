@@ -20,6 +20,11 @@ import 'package:find_your_home_test/modules/home/domain/usecases/get_houses_usec
 import 'package:find_your_home_test/modules/home/domain/usecases/get_favorites_usecase.dart';
 import 'package:find_your_home_test/modules/home/domain/usecases/toggle_favorite_usecase.dart';
 import 'package:find_your_home_test/modules/home/presentation/bloc/home/home_bloc.dart';
+import 'package:find_your_home_test/modules/house/data/datasources/house_detail_remote_datasource.dart';
+import 'package:find_your_home_test/modules/house/data/repositories_impl/house_detail_repository_impl.dart';
+import 'package:find_your_home_test/modules/house/domain/repositories/house_detail_repository.dart';
+import 'package:find_your_home_test/modules/house/domain/usecases/get_house_detail_usecase.dart';
+import 'package:find_your_home_test/modules/house/presentation/bloc/house_detail_bloc.dart';
 
 final GetIt locator = GetIt.instance;
 
@@ -31,6 +36,7 @@ Future<void> setupDependencies() async {
   locator.registerLazySingleton<AuthLocalDataSource>(() => AuthLocalDataSourceImpl(locator<SharedPreferences>()));
   locator.registerLazySingleton<HousesRemoteDataSource>(() => HousesRemoteDataSourceImpl(locator<DioClient>()));
   locator.registerLazySingleton<HousesLocalDataSource>(() => HousesLocalDataSourceImpl(locator<SharedPreferences>()));
+  locator.registerLazySingleton<HouseDetailRemoteDataSource>(() => HouseDetailRemoteDataSourceImpl(locator<DioClient>()));
   
   //Repositories
   locator.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(local: locator<AuthLocalDataSource>()));
@@ -40,6 +46,7 @@ Future<void> setupDependencies() async {
         locator<SharedPreferences>(),
         locator<NetworkInfo>(),
       ));
+  locator.registerLazySingleton<HouseDetailRepository>(() => HouseDetailRepositoryImpl(locator<HouseDetailRemoteDataSource>()));
 
   // Use cases
   locator.registerFactory<RegisterUserUseCase>(() => RegisterUserUseCase(locator<AuthRepository>()));
@@ -47,12 +54,18 @@ Future<void> setupDependencies() async {
   locator.registerFactory<GetHousesUseCase>(() => GetHousesUseCase(locator<HousesRepository>()));
   locator.registerFactory<GetFavoritesUseCase>(() => GetFavoritesUseCase(locator<HousesRepository>()));
   locator.registerFactory<ToggleFavoriteUseCase>(() => ToggleFavoriteUseCase(locator<HousesRepository>()));
+  locator.registerFactory<GetHouseDetailUseCase>(() => GetHouseDetailUseCase(locator<HouseDetailRepository>()));
 
   // Blocs
   locator.registerFactory<RegisterBloc>(() => RegisterBloc(registerUser: locator<RegisterUserUseCase>()));
   locator.registerFactory<LoginBloc>(() => LoginBloc(loginUser: locator<LoginUserUseCase>()));
   locator.registerFactory<HomeBloc>(() => HomeBloc(
         getHouses: locator<GetHousesUseCase>(),
+        getFavorites: locator<GetFavoritesUseCase>(),
+        toggleFavorite: locator<ToggleFavoriteUseCase>(),
+      ));
+  locator.registerFactory<HouseDetailBloc>(() => HouseDetailBloc(
+        getDetail: locator<GetHouseDetailUseCase>(),
         getFavorites: locator<GetFavoritesUseCase>(),
         toggleFavorite: locator<ToggleFavoriteUseCase>(),
       ));

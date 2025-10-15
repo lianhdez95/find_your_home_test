@@ -121,4 +121,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get exploreProperties => 'Explora propiedades';
+
+  @override
+  String get address => 'Dirección';
+
+  @override
+  String get description => 'Descripción';
+
+  @override
+  String get favorite => 'Favorito';
 }

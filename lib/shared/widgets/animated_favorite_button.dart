@@ -12,6 +12,7 @@ class AnimatedFavoriteButton extends StatefulWidget {
     this.inactiveColor = Colors.white,
     this.enableRipple = true,
     this.enableHaptics = true,
+    this.enableShadows = false,
   });
 
   final bool isFavorite;
@@ -21,6 +22,7 @@ class AnimatedFavoriteButton extends StatefulWidget {
   final Color inactiveColor;
   final bool enableRipple;
   final bool enableHaptics;
+  final bool enableShadows;
 
   @override
   State<AnimatedFavoriteButton> createState() => _AnimatedFavoriteButtonState();
@@ -116,12 +118,29 @@ class _AnimatedFavoriteButtonState extends State<AnimatedFavoriteButton>
                         height: widget.size,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: (widget.activeColor).withOpacity(0.2),
+                          color: (widget.activeColor).withAlpha(51),
                         ),
                       ),
                     ),
                   );
                 },
+              ),
+            if (widget.enableShadows)
+              Container(
+                width: widget.size + 10,
+                height: widget.size + 10,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.black.withOpacity(0.001),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color.fromRGBO(0, 0, 0, 0.35),
+                      blurRadius: 10,
+                      spreadRadius: 1,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
               ),
             ScaleTransition(
               scale: _scaleAnim,

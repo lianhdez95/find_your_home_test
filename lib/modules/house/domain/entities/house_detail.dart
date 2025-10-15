@@ -1,4 +1,6 @@
-class HouseDetail {
+import 'package:equatable/equatable.dart';
+
+class HouseDetail extends Equatable {
   final String? id;
   final String? title;
   final String? image;
@@ -22,4 +24,21 @@ class HouseDetail {
     this.zipCode,
     this.createdAt,
   });
+
+  @override
+  List<Object?> get props => [
+        id,
+        title,
+        image,
+        city,
+        price,
+        description,
+        address,
+        houseNumber,
+        zipCode,
+        createdAt,
+      ];
+
+  @override
+  bool get stringify => true;
 }

@@ -325,6 +325,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Explore properties'**
   String get exploreProperties;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
+
+  /// No description provided for @description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get description;
+
+  /// No description provided for @favorite.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite'**
+  String get favorite;
 }
 
 class _AppLocalizationsDelegate

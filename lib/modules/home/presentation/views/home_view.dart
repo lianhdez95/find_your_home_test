@@ -5,11 +5,13 @@ import 'package:find_your_home_test/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:find_your_home_test/shared/widgets/animated_favorite_button.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeView extends StatelessWidget {
   final String? email;
   final String? name;
-  const HomeView({super.key, this.email, this.name});
+  final void Function(String id) onHouseTap;
+  const HomeView({super.key, this.email, this.name, required this.onHouseTap});
 
   @override
   Widget build(BuildContext context) {
@@ -331,7 +333,8 @@ class HomeView extends StatelessWidget {
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            onTap: () {},
+                            onTap: () => onHouseTap(h.id!)
+                                
                           ),
                         ],
                       ),
