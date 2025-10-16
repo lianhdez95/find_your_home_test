@@ -21,6 +21,7 @@ class HomeView extends StatelessWidget {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
     final titleText = 'Find Your Home';
+    final isDark = theme.brightness == Brightness.dark;
     final double height = MediaQuery.of(context).size.height;
     final double topPadding = MediaQuery.of(context).padding.top;
     final double appBarCollapsedHeight =
@@ -50,8 +51,8 @@ class HomeView extends StatelessWidget {
             snap: true,
             pinned: true,
             expandedHeight: 160,
-            backgroundColor: theme.colorScheme.primary,
-            foregroundColor: theme.colorScheme.onPrimary,
+            backgroundColor: theme.appBarTheme.backgroundColor,
+            foregroundColor: theme.appBarTheme.foregroundColor,
             flexibleSpace: FlexibleSpaceBar(
               titlePadding: const EdgeInsetsDirectional.only(
                 start: 16,
@@ -66,9 +67,8 @@ class HomeView extends StatelessWidget {
                       titleText,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.titleLarge?.copyWith(
-                        color: theme.colorScheme.onPrimary,
-                      ),
+                      style: theme.appBarTheme.titleTextStyle ??
+                          theme.textTheme.titleLarge,
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -81,7 +81,8 @@ class HomeView extends StatelessWidget {
                     ),
                     icon: Icon(
                       Icons.search,
-                      color: theme.colorScheme.onPrimary,
+                      color: theme.appBarTheme.iconTheme?.color ??
+                          theme.colorScheme.onSurface,
                     ),
                     onPressed: () {
                       final repo = locator<HousesRepository>();
@@ -106,10 +107,15 @@ class HomeView extends StatelessWidget {
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [
-                      context.primaryBlue,
-                      context.primaryBlue.withAlpha(180),
-                    ],
+                    colors: isDark
+                        ? [
+                            theme.colorScheme.surfaceContainerHighest,
+                            theme.colorScheme.surface,
+                          ]
+                        : [
+                            context.primaryBlue,
+                            context.primaryBlue.withAlpha(180),
+                          ],
                   ),
                 ),
                 child: Align(
@@ -125,12 +131,14 @@ class HomeView extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 30,
-                          backgroundColor: context.colorScheme.onPrimary
+                          backgroundColor: (theme.appBarTheme.iconTheme?.color ??
+                                  theme.colorScheme.onSurface)
                               .withAlpha(40),
                           child: Icon(
                             Icons.person,
                             size: 32,
-                            color: context.colorScheme.onPrimary,
+                            color: theme.appBarTheme.iconTheme?.color ??
+                                theme.colorScheme.onSurface,
                           ),
                         ),
                         SizedBox(width: 12),
@@ -142,7 +150,8 @@ class HomeView extends StatelessWidget {
                             Text(
                               '${l10n!.welcomeMessage}, $name',
                               style: theme.textTheme.headlineSmall?.copyWith(
-                                color: theme.colorScheme.onPrimary,
+                                color: theme.appBarTheme.iconTheme?.color ??
+                                theme.colorScheme.onSurface,
                               ),
                             ),
                             if (email != null) ...[
@@ -150,9 +159,10 @@ class HomeView extends StatelessWidget {
                               Text(
                                 email!,
                                 style: theme.textTheme.bodyMedium?.copyWith(
-                                  color: theme.colorScheme.onPrimary.withAlpha(
-                                    220,
-                                  ),
+                                  color: theme.appBarTheme.iconTheme?.color ??
+                                      theme.colorScheme.onSurface.withAlpha(
+                                        220,
+                                      ),
                                 ),
                               ),
                             ],
@@ -197,7 +207,7 @@ class HomeView extends StatelessWidget {
                                 ),
                               ),
                               icon: const Icon(Icons.favorite, size: 18),
-                              label: const Text('Ver todos'),
+                              label: Text(l10n.showAll),
                             )
                           : OutlinedButton.icon(
                               onPressed: onPressed,
@@ -211,7 +221,7 @@ class HomeView extends StatelessWidget {
                                 ),
                               ),
                               icon: const Icon(Icons.favorite_border, size: 18),
-                              label: const Text('Ver favoritos'),
+                              label: Text(l10n.showFavorites),
                             );
                     },
                   ),

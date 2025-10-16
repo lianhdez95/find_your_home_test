@@ -59,6 +59,7 @@ class AppTheme {
         backgroundColor: _primaryBlue,
         foregroundColor: _white,
         elevation: 2,
+        surfaceTintColor: Colors.transparent,
         titleTextStyle: TextStyle(
           fontFamily: _fontFamily,
           fontSize: 20,
@@ -203,6 +204,7 @@ class AppTheme {
         backgroundColor: Color(0xFF1E1E1E),
         foregroundColor: _white,
         elevation: 2,
+        surfaceTintColor: Colors.transparent,
         titleTextStyle: TextStyle(
           fontFamily: _fontFamily,
           fontSize: 20,

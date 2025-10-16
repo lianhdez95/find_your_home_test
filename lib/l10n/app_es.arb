@@ -43,5 +43,8 @@
   "find_header": "Escribe el nombre o ciudad del inmueble",
   "find_center": "Escribe algo para buscar",
   "no_results": "No se encontraron resultados",
-  "searching": "Buscando..."
+  "searching": "Buscando...",
+  "showAll": "Mostrar todo",
+  "showFavorites": "Ver Favoritos",
+  "pleaseRegister": "Por favor, regístrate"
 }

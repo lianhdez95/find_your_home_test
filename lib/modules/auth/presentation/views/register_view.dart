@@ -59,7 +59,7 @@ class RegisterView extends StatelessWidget {
                   ),
                   AppSpacing.verticalSM,
                   Text(
-                    l10n.loginSubtitle,
+                    l10n.pleaseRegister,
                     style: context.bodyLarge.copyWith(color: context.colorScheme.onSurface.withAlpha(170)),
                     textAlign: TextAlign.center,
                   ),

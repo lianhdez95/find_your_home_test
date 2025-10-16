@@ -72,6 +72,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get registerButton => 'Registrarse';
 
   @override
+  String get pleaseRegister => 'Por favor, regístrate';
+
+  @override
   String get registerCta => '¿Ya tienes cuenta? Inicia sesión';
 
   @override
@@ -142,4 +145,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get searching => 'Buscando...';
+
+  @override
+  String get showAll => 'Mostrar todo';
+
+  @override
+  String get showFavorites => 'Ver Favoritos';
 }

@@ -224,6 +224,12 @@ abstract class AppLocalizations {
   /// **'Register'**
   String get registerButton;
 
+  /// No description provided for @pleaseRegister.
+  ///
+  /// In en, this message translates to:
+  /// **'Please, register'**
+  String get pleaseRegister;
+
   /// No description provided for @registerCta.
   ///
   /// In en, this message translates to:
@@ -367,6 +373,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Searching...'**
   String get searching;
+
+  /// No description provided for @showAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Show All'**
+  String get showAll;
+
+  /// No description provided for @showFavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Show Favorites'**
+  String get showFavorites;
 }
 
 class _AppLocalizationsDelegate

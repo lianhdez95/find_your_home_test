@@ -20,7 +20,8 @@
   "registerPasswordLabel": "Password",
   "registerPasswordHint": "Your password",
   "registerButton": "Register",
-    "registerCta": "Already have an account? Sign In",
+  "pleaseRegister": "Please, register",
+  "registerCta": "Already have an account? Sign In",
   "registerErrorEmailExists": "Email is already registered",
   "registerErrorEmailInvalid": "Invalid email",
   "registerErrorPasswordShort": "Password is too short",
@@ -43,5 +44,7 @@
   "find_header": "Type the property name or city",
   "find_center": "Type something to search",
   "no_results": "No results found",
-  "searching": "Searching..."
+  "searching": "Searching...",
+  "showAll": "Show All",
+  "showFavorites": "Show Favorites"
 }
