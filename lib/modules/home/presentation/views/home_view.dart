@@ -182,7 +182,7 @@ class HomeView extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Explora propiedades', style: context.titleLarge),
+                  Text(l10n.exploreProperties, style: context.titleLarge),
                   BlocBuilder<HomeBloc, HomeState>(
                     buildWhen: (p, n) =>
                         p.showOnlyFavorites != n.showOnlyFavorites,
