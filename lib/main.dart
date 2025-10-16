@@ -30,32 +30,31 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (context, themeMode) {
           return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      // El título se obtiene dinámicamente de localizaciones (usado en Android task switcher)
-  onGenerateTitle: (context) => AppLocalizations.of(context)?.appTitle ?? 'App',
-      routerConfig: routes,
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: themeMode,
-      builder: (context, child) {
-        // Aplicamos escalado tipográfico dinámico una sola vez aquí.
-        final theme = Theme.of(context);
-        final scaledTextTheme = scaleTextTheme(context, theme.textTheme);
-        return Theme(
-          data: theme.copyWith(textTheme: scaledTextTheme),
-          child: child!,
-        );
-      },
-      supportedLocales: const [
-        Locale('en'),
-        Locale('es'),
-      ],
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
+            
+            debugShowCheckedModeBanner: false,
+            // El título se obtiene dinámicamente de localizaciones (usado en Android task switcher)
+            onGenerateTitle: (context) =>
+                AppLocalizations.of(context)?.appTitle ?? 'App',
+            routerConfig: routes,
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: themeMode,
+            builder: (context, child) {
+              // Aplicamos escalado tipográfico dinámico una sola vez aquí.
+              final theme = Theme.of(context);
+              final scaledTextTheme = scaleTextTheme(context, theme.textTheme);
+              return Theme(
+                data: theme.copyWith(textTheme: scaledTextTheme),
+                child: child!,
+              );
+            },
+            supportedLocales: const [Locale('en'), Locale('es')],
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
           );
         },
       ),

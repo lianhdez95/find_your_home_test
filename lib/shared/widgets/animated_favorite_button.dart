@@ -131,7 +131,7 @@ class _AnimatedFavoriteButtonState extends State<AnimatedFavoriteButton>
                 height: widget.size + 10,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.black.withOpacity(0.001),
+                  color: Colors.black.withAlpha(200),
                   boxShadow: const [
                     BoxShadow(
                       color: Color.fromRGBO(0, 0, 0, 0.35),

@@ -18,7 +18,7 @@ class HouseDetailModel extends HouseDetail {
   });
 
   factory HouseDetailModel.fromJson(Map<String, dynamic> json) {
-    double _parseDouble(dynamic v) {
+    double parseDouble(dynamic v) {
       if (v == null) return 0;
       if (v is num) return v.toDouble();
       return double.tryParse(v.toString().replaceAll(',', '.')) ?? 0;
@@ -29,7 +29,7 @@ class HouseDetailModel extends HouseDetail {
       title: (json['title'] ?? '').toString(),
       image: (json['image'] ?? '').toString(),
       city: (json['city'] ?? '').toString(),
-      price: _parseDouble(json['price']),
+      price: parseDouble(json['price']),
       description: (json['description'] ?? '').toString(),
       address: (json['address'] ?? '').toString(),
       houseNumber: (json['house_number'] ?? '').toString(),
