@@ -100,25 +100,28 @@ class _AnimatedFavoriteButtonState extends State<AnimatedFavoriteButton>
       behavior: HitTestBehavior.opaque,
       onTap: widget.onTap,
       child: SizedBox(
-        width: widget.size + 12,
-        height: widget.size + 12,
+        width: widget.size * 2,
+        height: widget.size * 2,
         child: Stack(
+          clipBehavior: Clip.none,
           alignment: Alignment.center,
           children: [
             if (widget.enableRipple)
               AnimatedBuilder(
                 animation: _controller,
                 builder: (context, child) {
-                  return Opacity(
-                    opacity: _rippleOpacityAnim.value,
-                    child: Transform.scale(
-                      scale: _rippleScaleAnim.value,
-                      child: Container(
-                        width: widget.size,
-                        height: widget.size,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: (widget.activeColor).withAlpha(51),
+                  return ClipOval(
+                    child: Opacity(
+                      opacity: _rippleOpacityAnim.value,
+                      child: Transform.scale(
+                        scale: _rippleScaleAnim.value,
+                        child: Container(
+                          width: widget.size,
+                          height: widget.size,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: (widget.activeColor).withAlpha(51),
+                          ),
                         ),
                       ),
                     ),
@@ -126,20 +129,17 @@ class _AnimatedFavoriteButtonState extends State<AnimatedFavoriteButton>
                 },
               ),
             if (widget.enableShadows)
-              Container(
-                width: widget.size + 10,
-                height: widget.size + 10,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.black.withAlpha(200),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.35),
-                      blurRadius: 10,
-                      spreadRadius: 1,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
+              Transform.translate(
+                offset: const Offset(0, -5),
+                child: Material(
+                  type: MaterialType.circle,
+                  elevation: 6,
+                  color: Colors.transparent,
+                  shadowColor: const Color.fromRGBO(0, 0, 0, 0.35),
+                  child: SizedBox(
+                    width: widget.size + 10,
+                    height: widget.size + 10,
+                  ),
                 ),
               ),
             ScaleTransition(
