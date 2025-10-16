@@ -130,4 +130,16 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get favorite => 'Favorito';
+
+  @override
+  String get find_header => 'Escribe el nombre o ciudad del inmueble';
+
+  @override
+  String get find_center => 'Escribe algo para buscar';
+
+  @override
+  String get no_results => 'No se encontraron resultados';
+
+  @override
+  String get searching => 'Buscando...';
 }

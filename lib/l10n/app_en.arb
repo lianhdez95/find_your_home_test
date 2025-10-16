@@ -39,5 +39,9 @@
   "exploreProperties": "Explore properties",
   "address": "Address",
   "description": "Description",
-  "favorite": "Favorite"
+  "favorite": "Favorite",
+  "find_header": "Type the property name or city",
+  "find_center": "Type something to search",
+  "no_results": "No results found",
+  "searching": "Searching..."
 }

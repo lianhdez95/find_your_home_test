@@ -2,12 +2,11 @@ import 'package:find_your_home_test/modules/auth/presentation/pages/login_page.d
 import 'package:find_your_home_test/modules/auth/presentation/pages/register_page.dart';
 import 'package:find_your_home_test/modules/home/presentation/pages/home_page.dart';
 import 'package:find_your_home_test/modules/house/presentation/pages/house_page.dart';
-import 'package:find_your_home_test/modules/splash/presentation/pages/splash_page.dart';
 import 'package:find_your_home_test/shared/widgets/theme_example_page.dart';
 import 'package:go_router/go_router.dart';
 
 final routes = GoRouter(
-  initialLocation: '/splash',
+  initialLocation: '/login',
   routes: [
     GoRoute(
       path: '/theme',
@@ -15,12 +14,7 @@ final routes = GoRouter(
         return const ThemeExamplePage();
       },
     ),
-    GoRoute(
-      path: '/splash',
-      builder: (context, state) {
-        return const SplashPage();
-      },
-    ),
+    
     GoRoute(
       path: '/login',
       builder: (context, state) {

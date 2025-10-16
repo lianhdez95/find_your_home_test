@@ -130,4 +130,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get favorite => 'Favorite';
+
+  @override
+  String get find_header => 'Type the property name or city';
+
+  @override
+  String get find_center => 'Type something to search';
+
+  @override
+  String get no_results => 'No results found';
+
+  @override
+  String get searching => 'Searching...';
 }

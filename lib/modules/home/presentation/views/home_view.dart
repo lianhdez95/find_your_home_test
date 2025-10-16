@@ -5,7 +5,10 @@ import 'package:find_your_home_test/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:find_your_home_test/shared/widgets/animated_favorite_button.dart';
-import 'package:go_router/go_router.dart';
+import 'package:find_your_home_test/di/di.dart';
+import 'package:find_your_home_test/core/network/network_info.dart';
+import 'package:find_your_home_test/modules/home/domain/repositories/houses_repository.dart';
+import 'package:find_your_home_test/modules/home/presentation/search/houses_search_delegate.dart';
 
 class HomeView extends StatelessWidget {
   final String? email;
@@ -81,7 +84,19 @@ class HomeView extends StatelessWidget {
                       color: theme.colorScheme.onPrimary,
                     ),
                     onPressed: () {
-                      // TODO: Navegar a búsqueda o abrir campo de búsqueda
+                      final repo = locator<HousesRepository>();
+                      final net = locator<NetworkInfo>();
+                      final hint =
+                          l10n?.find_header ?? 'Buscar por nombre o ciudad';
+                      showSearch(
+                        context: context,
+                        delegate: HousesSearchDelegate(
+                          repository: repo,
+                          networkInfo: net,
+                          userEmail: email,
+                          searchHint: hint,
+                        ),
+                      );
                     },
                   ),
                 ],
@@ -154,10 +169,52 @@ class HomeView extends StatelessWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('Explora propiedades', style: context.titleLarge),
+                  BlocBuilder<HomeBloc, HomeState>(
+                    buildWhen: (p, n) =>
+                        p.showOnlyFavorites != n.showOnlyFavorites,
+                    builder: (context, state) {
+                      final active = state.showOnlyFavorites;
+                      void onPressed() {
+                        context.read<HomeBloc>().add(
+                          const HomeFilterFavoritesToggled(),
+                        );
+                      }
+                      return active
+                          ? FilledButton.icon(
+                              onPressed: onPressed,
+                              style: FilledButton.styleFrom(
+                                backgroundColor: theme.colorScheme.primary,
+                                foregroundColor: theme.colorScheme.onPrimary,
+                                minimumSize: const Size(0, 36),
+                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              icon: const Icon(Icons.favorite, size: 18),
+                              label: const Text('Ver todos'),
+                            )
+                          : OutlinedButton.icon(
+                              onPressed: onPressed,
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: theme.colorScheme.primary,
+                                minimumSize: const Size(0, 36),
+                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              icon: const Icon(Icons.favorite_border, size: 18),
+                              label: const Text('Ver favoritos'),
+                            );
+                    },
+                  ),
                 ],
               ),
             ),
@@ -197,7 +254,14 @@ class HomeView extends StatelessWidget {
                   ),
                 );
               }
-              final items = state.houses;
+              // Aplica filtro "solo favoritos" si está activo
+              List items = state.houses;
+              if (state.showOnlyFavorites) {
+                final favs = state.favorites;
+                items = items
+                    .where((h) => h.id != null && favs.contains(h.id))
+                    .toList();
+              }
               if (items.isEmpty) {
                 return const SliverToBoxAdapter(
                   child: Padding(
@@ -333,8 +397,7 @@ class HomeView extends StatelessWidget {
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            onTap: () => onHouseTap(h.id!)
-                                
+                            onTap: () => onHouseTap(h.id!),
                           ),
                         ],
                       ),

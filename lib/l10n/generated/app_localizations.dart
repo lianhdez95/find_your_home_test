@@ -343,6 +343,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Favorite'**
   String get favorite;
+
+  /// No description provided for @find_header.
+  ///
+  /// In en, this message translates to:
+  /// **'Type the property name or city'**
+  String get find_header;
+
+  /// No description provided for @find_center.
+  ///
+  /// In en, this message translates to:
+  /// **'Type something to search'**
+  String get find_center;
+
+  /// No description provided for @no_results.
+  ///
+  /// In en, this message translates to:
+  /// **'No results found'**
+  String get no_results;
+
+  /// No description provided for @searching.
+  ///
+  /// In en, this message translates to:
+  /// **'Searching...'**
+  String get searching;
 }
 
 class _AppLocalizationsDelegate

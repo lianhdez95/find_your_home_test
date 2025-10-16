@@ -39,5 +39,9 @@
   "exploreProperties": "Explora propiedades",
   "address": "Dirección",
   "description": "Descripción",
-  "favorite": "Favorito"
+  "favorite": "Favorito",
+  "find_header": "Escribe el nombre o ciudad del inmueble",
+  "find_center": "Escribe algo para buscar",
+  "no_results": "No se encontraron resultados",
+  "searching": "Buscando..."
 }

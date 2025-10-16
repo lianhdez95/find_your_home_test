@@ -18,6 +18,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeRefreshRequested>(_onRefresh);
     on<HomeFavoritesLoadRequested>(_onFavoritesLoad);
     on<HomeFavoriteToggled>(_onFavoriteToggled);
+    on<HomeFilterFavoritesToggled>(_onFilterFavoritesToggled);
   }
 
   Future<void> _onLoad(HomeLoadRequested event, Emitter<HomeState> emit) async {
@@ -96,5 +97,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       },
       onOk: (_) => logInfo('HomeBloc: toggle favorite success'),
     );
+  }
+
+  void _onFilterFavoritesToggled(HomeFilterFavoritesToggled event, Emitter<HomeState> emit) {
+    emit(state.copyWith(showOnlyFavorites: !state.showOnlyFavorites));
   }
 }

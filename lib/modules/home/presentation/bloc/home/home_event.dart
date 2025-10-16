@@ -30,3 +30,7 @@ class HomeFavoriteToggled extends HomeEvent {
   @override
   List<Object?> get props => [userEmail, houseId];
 }
+
+class HomeFilterFavoritesToggled extends HomeEvent {
+  const HomeFilterFavoritesToggled();
+}
