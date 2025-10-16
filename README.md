@@ -136,7 +136,7 @@ flutter test
 
 ## 🧭 Rutas principales
 
-- `/` Splash/Login
+- `/` Login
 - `/home` Listado principal
 - `/house/:id` Detalle de propiedad
 
